@@ -4,9 +4,10 @@
 }
 
 .plant-list {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .plant-card {

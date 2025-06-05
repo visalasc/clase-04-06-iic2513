@@ -17,4 +17,16 @@ export const plants = [
     image: 'https://images.unsplash.com/photo-1642004346232-7717892cec48?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Fácil de cuidar, ideal para interiores.',
   },
+    {
+    id: 4,
+    name: 'Coleus',
+    image: 'https://images.unsplash.com/photo-1708287580987-d60b72e49bb7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Planta colorida de follaje vibrante, ideal para sombra parcial.'
+  },
+  {
+    id: 5,
+    name: 'Alocasia',
+    image: 'https://images.unsplash.com/photo-1711683489417-e59f9733a842?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Planta exótica con hojas grandes y nervaduras marcadas.'
+  }
 ];

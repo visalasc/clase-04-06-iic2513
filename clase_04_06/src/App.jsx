@@ -1,58 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PlantCard from './components/PlantCard';
 import { plants } from './data/plants';
 import './App.css';
 
 function App() {
-  const [favorites, setFavorites] = useState([]);
+  const [favourites, setFavourites] = useState([]);
+  const favouritesRef = useRef(null);
 
-  useEffect(() => {
-    console.log('Favoritos actualizados:', favorites);
-  }, [favorites]);
-
-  const toggleFavorite = (id) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter(favId => favId !== id) : [...prev, id]
+  const toggleFavourite = (plant) => {
+    setFavourites((prev) =>
+      prev.includes(plant)
+        ? prev.filter((p) => p !== plant)
+        : [...prev, plant]
     );
   };
 
-  const favoritePlants = plants.filter(plant => favorites.includes(plant.id));
+  const scrollToFavourites = () => {
+    favouritesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <div className="app-wrapper">
-      <h1>Galería de Plantas 🌿</h1>
-      <div className="gallery-layout">
-        {/* Columna izquierda: grilla de todas las plantas */}
-        <div className="plant-list">
-          {plants.map((plant) => (
-            <PlantCard
-              key={plant.id}
-              plant={plant}
-              isFavorite={favorites.includes(plant.id)}
-              onToggleFavorite={() => toggleFavorite(plant.id)}
-            />
-          ))}
-        </div>
+    <div>
+      <h1>Galería de Plantas</h1>
+      <button onClick={scrollToFavourites}>Ver Favoritas</button>
 
-        {/* Columna derecha: lista de favoritas */}
-        <div className="favorites-panel">
-          <h2>Favoritas 💚</h2>
-          <div className="plant-list">
-          {/* Si no hay favoritas, mostrar mensaje */}
-          {favoritePlants.length === 0 ? (
-            <p>No hay plantas favoritas aún.</p>
-          ) : (
-            
-            favoritePlants.map((plant) => (
+      <div className="plant-sections">
+        {/* Todas las plantas */}
+        <div className="plant-section">
+          <h2>Todas las Plantas</h2>
+          <div className="plant-grid">
+            {plants.map((plant) => (
               <PlantCard
                 key={plant.id}
                 plant={plant}
-                isFavorite={true}
-                onToggleFavorite={() => toggleFavorite(plant.id)}
+                isFavourite={favourites.includes(plant)}
+                toggleFavourite={toggleFavourite}
               />
-            ))
-          )}
+            ))}
           </div>
+        </div>
+
+        {/* Favoritas */}
+        <div className="plant-section" ref={favouritesRef}>
+          <h2>Favoritas</h2>
+          {favourites.length === 0 ? (
+            <p>No hay plantas favoritas aún.</p>
+          ) : (
+            <div className="plant-grid">
+              {favourites.map((plant) => (
+                <PlantCard
+                  key={plant.id}
+                  plant={plant}
+                  isFavourite={true}
+                  toggleFavourite={toggleFavourite}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
